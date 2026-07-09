@@ -1,0 +1,22 @@
+version: 2
+
+models:
+    - name: customer_segments
+      description: 注文回数にもとづいた顧客セグメントを付与
+
+      columns:
+        - name: customer_id
+          description: 顧客を識別するユニークキー
+          tests:
+            - unique
+            - not_null
+
+        - name: number_of_orders
+          description: 顧客の注文回数
+        
+        - name: customer_segment
+          description: 顧客を注文回数で分類したセグメント。prospect(見込み)/ new(新規)/ returning(リピーター)/ loyal(優良)のいずれか
+          data_tests:
+            - accepted_values:
+                arguments:
+                  values: ['prospect', 'new', 'returning', 'loyal'] 
